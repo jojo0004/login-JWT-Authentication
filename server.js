@@ -7,25 +7,16 @@ const UserModel = require('./model/UserModel');
 
 app.use(express.json())
 
-const posts = [
-  {
-    username: 'Kyle',
-    title: 'Post 1'
-  },
-  {
-    username: 'Jim',
-    title: 'Post 2'
-  }
-]
+
 
 app.get('/posts', authenticateToken, (req, res) => {
  // console.log(user,req.user)
   UserModel.getUser({CUSCOD:req.user.user})
   .then(([row]) => {
       if (row.length !== 0) {
-        console.log("bb",row)
+        //console.log("bb",row)
         //  res.send(row)
-         
+          res.json(row)
       }else{
        
          // console.log(MA)
@@ -37,7 +28,7 @@ app.get('/posts', authenticateToken, (req, res) => {
               message: error
           })
   })
- // res.json(posts.filter(post => post.username === req.user.name))
+ 
 
 })
 
