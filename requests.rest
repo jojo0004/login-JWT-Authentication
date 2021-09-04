@@ -1,30 +1,38 @@
-GET http://localhost:3000/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmltIiwiaWF0IjoxNjI5NzA2MDk5LCJleHAiOjE2Mjk3MDYxMTR9.qJjBdmyguGsRD1d0VHAjnh8UMT26ySQEk9BbdR4vTVQ
+GET https://api.cal.ap.ngrok.io/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTQwOTkzMDAwMDAxMCAgICAgICAgICAgIiwiaWF0IjoxNjMwNDAyODE4LCJleHAiOjE2MzA0MDI4MzN9.KRrsudyQXqcR6jDcbf7dn3vPJo6FfnWMoKDcWSknDvg
 
 ###
 
-DELETE http://localhost:4000/logout
+DELETE https://api.cal.ap.ngrok.io/logout
 Content-Type: application/json
 
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmltIiwiaWF0IjoxNTY4NzU5OTIyfQ.RT6wszuCeFLwC_6ksmNMIELxiC5s-uRivfRxyZof5ag"
+  "token": "eyJhbGciOiJIUzI1NiJ9.MTQwOTkzMDAwMDAxMCAgICAgICAgICAg.yhUTPLOCDIOlY5GFLeox9TI6uUV_C4bQ7Qo9cJWRNt0"
 }
 
 ###
 
-POST http://localhost:4000/token
+POST https://api.cal.ap.ngrok.io/token
 Content-Type: application/json
 
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmltIiwiaWF0IjoxNjI5NzA2MDUzfQ.t26eAMixOsiSfC7cjl4COMxJUPKHpP3X-liaSwemMLE"
+  "token": "eyJhbGciOiJIUzI1NiJ9.MTQwOTkzMDAwMDAxMCAgICAgICAgICAg.yhUTPLOCDIOlY5GFLeox9TI6uUV_C4bQ7Qo9cJWRNt0"
 }
 
 ###
 
-POST http://localhost:4000/login
+POST https://api.cal.ap.ngrok.io/login
 Content-Type: application/json
 
 {
   "CUSCOD": "1409900367710",
   "PASSWORD": "7710"
 }
+
+###
+POST https://api.cal.ap.ngrok.io/getcontno1/8-0009098
+
+
+###
+GET  https://api.cal.ap.ngrok.io/loans/getAllBycustmast
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTQwOTkzMDAwMDAxMCAgICAgICAgICAgIiwibWEiOiJQU0ZIUCIsImV4cGlyZXNJbiI6MzYwMCwiaWF0IjoxNjMwNDA0MzUxLCJleHAiOjE2MzA0MDc5NTF9.lkJQ29TKam59QMhLMGu_-zoKTQtTdx0DrJhg77_Sxx8
