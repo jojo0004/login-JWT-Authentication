@@ -351,8 +351,8 @@ exports.getre2 = (req, res, next) => {
                     const re3 = dataDAMT.reduce((sum, number) => {
                         return sum + number
                     }, 0)
-                    tttt.push(0)
-                    te.push({ INTAMT: re, fee: re1, DELAY: re2, DAMT: re3, row, contno_, tttt });
+                   
+                    te.push({ INTAMT: re, fee: re1, DELAY: re2, DAMT: re3, row, contno_});
                     res.send(te)
                 }
 
@@ -419,7 +419,6 @@ exports.getre2 = (req, res, next) => {
 
                             } else {
                                 tttt.push(0)
-
 
                             }
 

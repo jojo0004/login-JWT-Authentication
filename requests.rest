@@ -1,5 +1,5 @@
 GET https://api.cal.ap.ngrok.io/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTQwOTkzMDAwMDAxMCAgICAgICAgICAgIiwiaWF0IjoxNjMwNDAyODE4LCJleHAiOjE2MzA0MDI4MzN9.KRrsudyQXqcR6jDcbf7dn3vPJo6FfnWMoKDcWSknDvg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTQwOTkzMDAwMDAxMCAgICAgICAgICAgIiwibWEiOiJQU0ZIUCIsImV4cGlyZXNJbiI6MzYwMCwiaWF0IjoxNjMwNTU2NDY1LCJleHAiOjE2MzA1NTY3NjV9.GS8lT6wTMOLYS899z8Zr_atlUTuHbgaUmMMHkkMSadk
 
 ###
 
@@ -30,9 +30,12 @@ Content-Type: application/json
 }
 
 ###
-POST https://api.cal.ap.ngrok.io/getcontno1/8-0009098
-
+GET https://api.cal.ap.ngrok.io/getcontno1/3-0000564           /PSFHP
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTQwOTkzMDAwMDAxMCAgICAgICAgICAgIiwibWEiOiJQU0ZIUCIsImV4cGlyZXNJbiI6MzYwMCwiaWF0IjoxNjMwNzQyNTQyLCJleHAiOjE2MzA3NDYxNDJ9.oeg6d6SLwpRXEr6xsjzQT4i2qUZqncOOzoIjrZkbhvg
 
 ###
-GET  https://api.cal.ap.ngrok.io/loans/getAllBycustmast
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTQwOTkzMDAwMDAxMCAgICAgICAgICAgIiwibWEiOiJQU0ZIUCIsImV4cGlyZXNJbiI6MzYwMCwiaWF0IjoxNjMwNDA0MzUxLCJleHAiOjE2MzA0MDc5NTF9.lkJQ29TKam59QMhLMGu_-zoKTQtTdx0DrJhg77_Sxx8
+GET  https://api.cal.ap.ngrok.io/loans/PSFHP/3-0000010 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTQwOTkzMDAwMDAxMCAgICAgICAgICAgIiwibWEiOiJQU0ZIUCIsImV4cGlyZXNJbiI6MzYwMCwiaWF0IjoxNjMwNTcyOTA3LCJleHAiOjE2MzA1NzY1MDd9.3VI6C8zVGimXfzgcL90xJa-KeiwhTB_ifkZQvnH_z0E
+
+###
+GET https://api.cal.ap.ngrok.io/getcusmast/1-0003380/LSFHP

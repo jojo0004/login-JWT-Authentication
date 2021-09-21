@@ -62,3 +62,54 @@ exports.querychqtran = async ({ ma, contno }) => {
         console.log(err.message);
     }
 };
+
+
+exports.querycusmast = async ({ ma, contno }) => {
+    try {
+        return await pool.query("SELECT " + ma.toLowerCase() +"_armast.TOT_UPAY,T_NOPAY, DDATE,NAME1, NAME2, SNAM, " + ma.toLowerCase() +"_armast.CONTNO, " + ma.toLowerCase() +"_armast.PRODUCTID, " + ma.toLowerCase() +"_armast.SDATE,TCSHPRC, TYPE, BAAB, STRNO, MODEL, COLOR, ENGNO, REGNO FROM cal2009." + ma.toLowerCase() +"_custmast left join " + ma.toLowerCase() +"_armast on " + ma.toLowerCase() +"_custmast.CUSCOD = " + ma.toLowerCase() +"_armast.CUSCOD join " + ma.toLowerCase() +"_arpay on " + ma.toLowerCase() +"_arpay.contno = " + ma.toLowerCase() +"_armast.contno   join " + ma.toLowerCase() +"_invtran on " + ma.toLowerCase() +"_invtran.contno = " + ma.toLowerCase() +"_armast.contno where " + ma.toLowerCase() +"_armast.contno = ? order by NOPAY asc limit 1" , [contno]);
+    }
+    catch (err) {
+        console.log(err.message);
+    }
+};
+
+
+
+exports.getcard = async ({contno='',ddate='',ma=''}) => {      
+    try { 
+    return await pool.query("SELECT cal2009." + ma.toLowerCase() + "_arpay.CONTNO,T_NOPAY,NAME1,NAME2,REGNO,NOPAY,DDATE,DAMT,DATE1,PAYMENT,DELAY,INTAMT,cal2009." + ma.toLowerCase() + "_invtran.STRNO,cal2009." + ma.toLowerCase() + "_invtran.TYPE,cal2009." + ma.toLowerCase() + "_invtran.BAAB,GRDCOD,LPAYD,LPAYA  "
+    +" FROM cal2009." + ma.toLowerCase() + "_armast LEFT JOIN cal2009." + ma.toLowerCase() + "_custmast ON cal2009." + ma.toLowerCase() + "_armast.CUSCOD = cal2009." + ma.toLowerCase() + "_custmast.CUSCOD JOIN cal2009." + ma.toLowerCase() + "_arpay ON cal2009." + ma.toLowerCase() + "_armast.CONTNO= cal2009." + ma.toLowerCase() + "_arpay.CONTNO JOIN cal2009." + ma.toLowerCase() + "_invtran ON cal2009." + ma.toLowerCase() + "_invtran.CONTNO = cal2009." + ma.toLowerCase() + "_arpay.CONTNO "
+    +" WHERE cal2009." + ma.toLowerCase() + "_arpay.CONTNO = ? AND cal2009." + ma.toLowerCase() + "_arpay.ddate <= ? AND cal2009." + ma.toLowerCase() + "_arpay.DAMT > cal2009." + ma.toLowerCase() + "_arpay.PAYMENT order by nopay",
+    [contno,ddate])
+    }
+    catch (err) {
+        console.log(err.message);
+    }
+}
+
+
+
+exports.getarpay_0= async ({contno='',ma=''}) =>{ 
+    try {       
+    return await pool.query(" SELECT cal2009." + ma.toLowerCase() + "_arpay.CONTNO,T_NOPAY,NAME1,NAME2,REGNO,NOPAY,DDATE,DAMT,DATE1,PAYMENT,DELAY,INTAMT,cal2009." + ma.toLowerCase() + "_invtran.STRNO,cal2009." + ma.toLowerCase() + "_invtran.TYPE,cal2009." + ma.toLowerCase() + "_invtran.BAAB,GRDCOD,LPAYD,LPAYA  " 
+    +" FROM cal2009." + ma.toLowerCase() + "_armast LEFT JOIN cal2009." + ma.toLowerCase() + "_custmast ON cal2009." + ma.toLowerCase() + "_armast.CUSCOD = cal2009." + ma.toLowerCase() + "_custmast.CUSCOD JOIN cal2009." + ma.toLowerCase() + "_arpay ON cal2009." + ma.toLowerCase() + "_armast.CONTNO=  cal2009." + ma.toLowerCase() + "_arpay.CONTNO "
+    +" JOIN cal2009." + ma.toLowerCase() + "_invtran ON cal2009." + ma.toLowerCase() + "_invtran.CONTNO = cal2009." + ma.toLowerCase() + "_arpay.CONTNO WHERE cal2009." + ma.toLowerCase() + "_arpay.CONTNO = ? AND DAMT-PAYMENT != 0 order by DDATE ASC LIMIT 2",
+    [contno])
+}
+catch (err) {
+    console.log(err.message);
+}
+}
+
+
+exports.getarpay = async ({ ma, contno }) => {
+    try {
+        return await pool.query(" SELECT cal2009." + ma.toLowerCase() + "_arpay.CONTNO,T_NOPAY,NAME1,NAME2,REGNO,NOPAY,DDATE,DAMT,DATE1,PAYMENT,DELAY,INTAMT,cal2009." + ma.toLowerCase() + "_invtran.STRNO,cal2009." + ma.toLowerCase() + "_invtran.TYPE,cal2009." + ma.toLowerCase() + "_invtran.BAAB,GRDCOD,LPAYD,LPAYA  " 
+        +" FROM cal2009." + ma.toLowerCase() + "_armast LEFT JOIN cal2009." + ma.toLowerCase() + "_custmast ON cal2009." + ma.toLowerCase() + "_armast.CUSCOD = cal2009." + ma.toLowerCase() + "_custmast.CUSCOD JOIN cal2009." + ma.toLowerCase() + "_arpay ON cal2009." + ma.toLowerCase() + "_armast.CONTNO=  cal2009." + ma.toLowerCase() + "_arpay.CONTNO "
+        +" JOIN cal2009." + ma.toLowerCase() + "_invtran ON cal2009." + ma.toLowerCase() + "_invtran.CONTNO = cal2009." + ma.toLowerCase() + "_arpay.CONTNO WHERE cal2009." + ma.toLowerCase() + "_arpay.CONTNO = ? AND DAMT-PAYMENT != 0 order by DDATE ASC LIMIT 1",
+        [contno]);
+    }
+    catch (err) {
+        console.log(err.message);
+    }
+};

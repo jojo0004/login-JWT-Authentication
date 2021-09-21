@@ -9,5 +9,5 @@ router.get('/getAllBycustmast',authenticateToken,loansController.getAllBycustmas
 router.get('/:ma/:contno',authenticateToken,loansController.getLoanByMaAndContno);
 router.get('/installment/:ma/:contno',authenticateToken,loansController.getInstallmentByMaAndContno);
 router.get('/installment/history/:ma/:contno',authenticateToken,loansController.getInstallmentHistoryByMaAndContno)
-
+router.get('/getCard/:ma/:contno',loansController.getAllcard);
 module.exports = router;
