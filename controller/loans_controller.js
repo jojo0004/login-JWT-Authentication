@@ -1,4 +1,5 @@
 const loansModel = require('../model/loans_model');
+const UserModel = require('../model/UserModel')
 
 exports.getAllcard = (req, res, next) => {
     //  const personalId = req.user.user;
@@ -439,3 +440,594 @@ exports.getcusmast = (req, res, next) => {
         });
 };
 
+
+//-------------------------------------ขอส่วนลด----------------------------------------------------------------------------//
+
+
+exports.getcontno = (req, res, next) => {
+
+    UserModel.getcontno()
+        .then(([row]) => {     
+            res.send(row)
+
+        }).catch((error) => {
+            res.status(500)
+                .json({
+                    message: error
+                })
+        })
+
+}
+
+exports.getre1 = (req, res, next) => {
+    const contno = req.params.contno
+    const CREAT = new Date();
+    const Year = CREAT.getFullYear();
+    const day = CREAT.getDate();
+    const Month = CREAT.getMonth() + 1;
+    EndDate = new Date()
+    const t = "" + Year + "" + '-' + "" + Month + "" + '-' + "" + day + ""
+
+    UserModel.getre1({ contno: contno, ddate: t })
+        .then(([row]) => {
+            let dok1 = []
+            let nopay_1 = []
+            row.forEach(i => {
+
+                let bala = +i.tcshprc
+                if (+i.totalnopay > +i.t_nopay) {
+                    if (bala < 100000) {
+                        let dok = 0.019
+                        let dok_to = +dok * (+i.totalnopay - 1)
+                        let dok_total = 1 + +dok_to
+                        let to_tal = +bala * +dok_total
+                        let all = +to_tal - +i.totalpayment
+            
+                        nopay_1.push(+i.totalnopay - 1)
+                        dok1.push(all)
+                        return dok1
+                    } else if (bala >= 100000 && bala < 150000) {
+                        let dok = 0.0185
+                        let dok_to = +dok * (+i.totalnopay - 1)
+                        let dok_total = 1 + +dok_to
+                        let to_tal = +bala * +dok_total
+                        let all = +to_tal - +i.totalpayment
+                        nopay_1.push(+i.totalnopay - 1)
+                        dok1.push(all)
+                        return dok1
+                    }
+                    else if (bala >= 150000 && bala < 200000) {
+                        let dok = 0.018
+                        let dok_to = +dok * (+i.totalnopay - 1)
+                        let dok_total = 1 + +dok_to
+                        let to_tal = +bala * +dok_total
+                        let all = +to_tal - +i.totalpayment
+                        nopay_1.push(+i.totalnopay - 1)
+                        dok1.push(all)
+                        return dok1
+                    }
+                    else if (bala >= 200000 && bala < 250000) {
+                        let dok = 0.0175
+                        let dok_to = +dok * (+i.totalnopay - 1)
+                        let dok_total = 1 + +dok_to
+                        let to_tal = +bala * +dok_total
+                        let all = +to_tal - +i.totalpayment
+                        nopay_1.push(+i.totalnopay - 1)
+                        dok1.push(all)
+                        return dok1
+
+                    }
+                    else if (bala >= 250000 && bala < 300000) {
+                        let dok = 0.0170
+                        let dok_to = +dok * (+i.totalnopay - 1)
+                        let dok_total = 1 + +dok_to
+                        let to_tal = +bala * +dok_total
+                        let all = +to_tal - +i.totalpayment
+                        nopay_1.push(+i.totalnopay - 1)
+                        dok1.push(all)
+                        return dok1
+                    }
+                    else if (bala >= 300000 && bala < 350000) {
+                        let dok = 0.0165
+                        let dok_to = +dok * (+i.totalnopay - 1)
+                        let dok_total = 1 + +dok_to
+                        let to_tal = +bala * +dok_total
+                        let all = +to_tal - +i.totalpayment
+                        nopay_1.push(+i.totalnopay - 1)
+                        dok1.push(all)
+                        return dok1
+                    }
+                    else {
+                        let dok = 0.0160
+                        let dok_to = +dok * (+i.totalnopay - 1)
+                        let dok_total = 1 + +dok_to
+                        let to_tal = +bala * +dok_total
+                        let all = +to_tal - +i.totalpayment
+                        nopay_1.push(+i.totalnopay - 1)
+                        dok1.push(all)
+
+                    }
+                    return dok1
+
+                } else {
+                    if (bala < 100000) {
+                        let dok = 0.019
+                        let dok_to = +dok * (+i.totalnopay)
+                        let dok_total = 1 + +dok_to
+                        let to_tal = +bala * +dok_total
+                        let all = +to_tal - +i.totalpayment
+                       
+                        nopay_1.push(+i.totalnopay)
+                        dok1.push(all)
+                        return dok1
+                    } else if (bala >= 100000 && bala < 150000) {
+                        let dok = 0.0185
+                        let dok_to = +dok * (+i.totalnopay)
+                        let dok_total = 1 + +dok_to
+                        let to_tal = +bala * +dok_total
+                        let all = +to_tal - +i.totalpayment
+                        nopay_1.push(+i.totalnopay)
+                        dok1.push(all)
+                        return dok1
+                    }
+                    else if (bala >= 150000 && bala < 200000) {
+                        let dok = 0.018
+                        let dok_to = +dok * (+i.totalnopay)
+                        let dok_total = 1 + +dok_to
+                        let to_tal = +bala * +dok_total
+                        let all = +to_tal - +i.totalpayment
+                        nopay_1.push(+i.totalnopay)
+                        dok1.push(all)
+                        return dok1
+                    }
+                    else if (bala >= 200000 && bala < 250000) {
+                        let dok = 0.0175
+                        let dok_to = +dok * (+i.totalnopay)
+                        let dok_total = 1 + +dok_to
+                        let to_tal = +bala * +dok_total
+                        let all = +to_tal - +i.totalpayment
+                        nopay_1.push(+i.totalnopay)
+                        dok1.push(all)
+                        return dok1
+
+                    }
+                    else if (bala >= 250000 && bala < 300000) {
+                        let dok = 0.0170
+                        let dok_to = +dok * (+i.totalnopay)
+                        let dok_total = 1 + +dok_to
+                        let to_tal = +bala * +dok_total
+                        let all = +to_tal - +i.totalpayment
+                        nopay_1.push(+i.totalnopay)
+                        dok1.push(all)
+                        return dok1
+                    }
+                    else if (bala >= 300000 && bala < 350000) {
+                        let dok = 0.0165
+                        let dok_to = +dok * (+i.totalnopay)
+                        let dok_total = 1 + +dok_to
+                        let to_tal = +bala * +dok_total
+                        let all = +to_tal - +i.totalpayment
+                        nopay_1.push(+i.totalnopay)
+                        dok1.push(all)
+                        return dok1
+                    }
+                    else {
+                        let dok = 0.0160
+                        let dok_to = +dok * (+i.totalnopay)
+                        let dok_total = 1 + +dok_to
+                        let to_tal = +bala * +dok_total
+                        let all = +to_tal - +i.totalpayment
+                        nopay_1.push(+i.totalnopay)
+                        dok1.push(all)
+
+                    }
+                    return dok1
+                }
+            })
+
+            
+            var s1 = (dok1 / 10000)
+          
+            var s2 = Number((s1 * 100).toString().match(/^\d+/) / 100) * 10000
+                  
+            req.re1 = s2.toFixed(0)
+            req.no = nopay_1[0]
+            next()
+
+
+        }).catch((error) => {
+            res.status(500)
+                .json({
+                    message: error
+                })
+        })
+
+}
+
+
+exports.getre2 = (req, res, next) => {
+    const contno = req.params.contno
+    const totalpayment = req.body.totalpayment
+    const nopay = req.body.t_nopay
+    const req_no = req.no
+    const CREAT = new Date();
+    const Year = CREAT.getFullYear();
+    const day = CREAT.getDate();
+    const Month = CREAT.getMonth() + 1;
+    EndDate = new Date()
+    const t = "" + Year + "" + '-' + "" + Month + "" + '-' + "" + day + ""
+
+    UserModel.getdamt({ contno: contno, ddate: t })
+        .then(([row]) => {
+            dataDAMT = []
+            checkDelay = []
+            dataDELAY = []
+            dataNOPAT = []
+            data = []
+            data1 = []
+            te = []
+            te1 = []
+            bu = []
+            var arr = new Array();
+            bu1 = []
+            tttt = []
+            for (i = 0; i <= row.length - 1; i++) {
+                const StartDDATE = row[i].DDATE;
+                const StartDate = row[i].DATE1;
+                const PAY = ~~row[i].NOPAY;
+                const TCSHPRC = ~~row[i].DAMT;
+                const TOTPRC = ~~row[i].DELAY;
+                const PAYMENT = ~~row[i].PAYMENT;
+                StartD = new Date(StartDDATE)
+                Start1 = new Date(StartDate)
+                diffD = EndDate.getTime() - StartD.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
+                diffD = Math.floor(diffD / (1000 * 60 * 60 * 24));
+
+                if (StartDate !== null && TCSHPRC > PAYMENT) {
+
+                    StartD = new Date(StartDDATE)
+                    Start1 = new Date(StartDate)
+                    if (Start1.getTime() <= StartD.getTime()) {
+                        diffD = EndDate.getTime() - StartD.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
+                        diffD = Math.floor(diffD / (1000 * 60 * 60 * 24));
+
+                        if (diffD >= 8) {
+                            var DAMs = TCSHPRC - PAYMENT
+                            var fees = ((DAMs * 0.0175) / 30)
+                            var INTAMTs = ((DAMs * 0.0125) / 30)
+                            var INTAMTD = (INTAMTs * diffD)
+                            var feeD = (fees * diffD)
+                            tttt.push(INTAMTD + feeD)
+                            data.push(INTAMTD)
+                            data1.push(feeD)
+                            dataDELAY.push(diffD)
+                            checkDelay.push(diffD)
+
+                        } else {
+                            tttt.push(0)
+
+
+                        }
+
+                    } else {
+                        //----เริ่มคิดตั้งแต่วันที่ชำระ จนถึงงวดที่ตัวเองต้องจ่าย------//
+                        diffD = Start1.getTime() - StartD.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
+                        diffD = Math.floor(diffD / (1000 * 60 * 60 * 24));
+
+                        if (diffD >= 8) {
+                            var DAMs = TCSHPRC
+                            var fees = ((DAMs * 0.0175) / 30)
+                            var INTAMTs = ((DAMs * 0.0125) / 30)
+                            var INTAMTD = (INTAMTs * diffD)
+                            var feeD = (fees * diffD)
+                            tttt.push(INTAMTD + feeD)
+                            diff = EndDate.getTime() - Start1.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
+                            diff = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+                            if (diff >= 8) {
+                                var DAMs = TCSHPRC - PAYMENT
+                                var fees = ((DAMs * 0.0175) / 30)
+                                var INTAMTs = ((DAMs * 0.0125) / 30)
+                                var INTAMTst = (INTAMTs * diff)
+                                var feest = (fees * diff)
+                                data.push(INTAMTst)
+                                data1.push(feest)
+                                dataDELAY.push(diff)
+                                checkDelay.push(diffD)
+
+                            }
+
+
+
+                        } else {
+                            tttt.push(0)
+                            diff = EndDate.getTime() - Start1.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
+                            diff = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+                            if (diff >= 8) {
+                                var DAMs = TCSHPRC - PAYMENT
+                                var fees = ((DAMs * 0.0175) / 30)
+                                var INTAMTs = ((DAMs * 0.0125) / 30)
+                                var INTAMTst = (INTAMTs * diff)
+                                var feest = (fees * diff)
+                                data.push(INTAMTst)
+                                data1.push(feest)
+                                dataDELAY.push(diff)
+
+                            }
+                        }
+                    }
+                }
+                if (diffD >= 8 && StartDate === null) {
+
+                    DDATE = new Date(StartDDATE)
+                    diff1 = EndDate.getTime() - DDATE.getTime();
+                    diff1 = Math.floor(diff1 / (1000 * 60 * 60 * 24));
+                    var DAM = TCSHPRC - PAYMENT
+                    var fee0 = ((TCSHPRC * 0.0175) / 30)
+                    var INTAMT0 = ((TCSHPRC * 0.0125) / 30)
+                    var INTAMT = Math.round(INTAMT0 * diff1)
+                    var fee = Math.round(fee0 * diff1)
+                    dataNOPAT.push(PAY)
+                    dataDAMT.push(DAM)
+                    dataDELAY.push(diff1)
+                    data.push(INTAMT)
+                    data1.push(fee)
+                } else {
+
+                    var DAM = TCSHPRC - PAYMENT
+                    dataNOPAT.push(PAY)
+                    dataDAMT.push(DAM)
+                    INTAMT = 0
+                    fee = 0
+                }
+            }
+            if (row.length === 0) {
+                UserModel.getMax_nopay({ contno: contno })
+                    .then(([row]) => {
+                        const totalnopay = +nopay - +row[0].NOPAY
+                      
+                        tttt.push(0)
+                        te.push({ INTAMT: 0, fee: 0, DELAY: 0, tttt, totalnopay: totalnopay })
+                        UserModel.getaa({ contno: contno })
+                            .then(([row]) => {
+
+                                row.forEach((i) => {
+
+                                    let a = ~~i.aa + Math.round(~~te[0].tttt)
+                                   
+                                    bu.push(a, i.payment)
+
+
+                                })
+                                UserModel.getPayint({ contno: contno })
+                                    .then(([row1]) => {
+                                        row1.forEach((i) => {
+
+                                            let b = ~~i.PAYI - ~~bu[0]
+                                            let balan = ~~i.balanc - totalpayment
+                                            var INTAMT_fee = Math.round(-b * 0.415667)
+                                            var fee_INTAMT = Math.round(-b * 0.5843337)
+                                            var c = Math.round(te[0].INTAMT + INTAMT_fee) + Math.round(te[0].fee + fee_INTAMT)
+
+                                            if (~~nopay <= 12) {
+                                                let dok = 0.06
+                                                let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                                bu1.push(all1.toFixed(0))
+                                                return bu1
+                                            } else if (~~nopay == 24) {
+                                                let dok = 0.09
+                                                let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+
+                                                bu1.push(all1.toFixed(0))
+                                                return bu1
+                                            }
+                                            else if (~~nopay == 30) {
+                                                let dok = 0.11
+                                                let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                                bu1.push(all1.toFixed(0))
+                                                return bu1
+                                            }
+                                            else if (~~nopay == 36) {
+
+                                                let dok = 0.13
+                                                let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                                bu1.push(all1.toFixed(0))
+                                                return bu1
+                                            }
+                                            else if (~~nopay == 42) {
+                                                let dok = 0.145
+                                                let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                                bu1.push(all1.toFixed(0))
+                                                return bu1
+                                            }
+                                            else if (~~nopay == 48) {
+
+                                                let dok = 0.16
+                                                let all1 = (balan + c) - ((bu[1] * +te[0].totalnopay) * dok)
+                                                bu1.push(all1 | 0)
+                                               
+                                                return bu1
+                                            }
+                                            else if (~~nopay == 54) {
+                                                let dok = 0.175
+                                                let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                                bu1.push(all1.toFixed(0))
+                                                return bu1
+                                            }
+                                            else if (~~nopay == 60) {
+                                                let dok = 0.19
+                                                let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                                bu1.push(all1.toFixed(0))
+                                                return bu1
+                                            }
+                                            else if (~~nopay == 66) {
+                                                let dok = 0.205
+                                                let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                                bu1.push(all1.toFixed(0))
+                                                return bu1
+                                            }
+                                            else if (~~nopay == 72) {
+                                                let dok = 0.22
+                                                let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                                bu1.push(all1.toFixed(0))
+                                                return bu1
+                                            } else {
+                                                let dok = 0.25
+                                                let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                                bu1.push(all1.toFixed(0))
+                                            }
+
+                                            return bu1
+
+                                        })
+
+                                        var s1 = bu1 / 10000
+                                        var s2 = Number((s1 * 100).toString().match(/^\d+/) / 100)
+                                        var s3 = +s2 * 10000
+                                        
+                                        res.send({re1:req.re1,re2:s3.toFixed(0)})
+
+                                    }).catch((error) => {
+                                        console.log(error)
+                                    })
+
+
+                            }).catch((error) => {
+                                console.log(error)
+                            })
+                    })
+            } else {
+                const totalnopay = +nopay - +req_no
+              
+                const re = data.reduce((sum, number) => {
+                    return sum + number
+                }, 0)
+                const re1 = data1.reduce((sum, number) => {
+                    return sum + number
+                }, 0)
+                const re2 = dataDELAY.reduce((sum, number) => {
+                    return sum + number
+                }, 0)
+                const re3 = dataDAMT.reduce((sum, number) => {
+                    return sum + number
+                }, 0)
+                te.push({ INTAMT: re, fee: re1, DELAY: re2, DAMT: re3, row, te1, tttt, checkDelay, totalnopay: totalnopay })
+                UserModel.getaa({ contno: contno })
+                    .then(([row]) => {
+                        row.forEach((i) => {
+                            let a = ~~i.aa + Math.round(~~te[0].tttt)
+                            
+                            bu.push(a, i.payment)
+                        })
+                        UserModel.getPayint({ contno: contno })
+                            .then(([row1]) => {
+                                row1.forEach((i) => {
+                                    let b = ~~i.PAYI - ~~bu[0]
+                                    let balan = ~~i.balanc - totalpayment
+                                   
+                                    var INTAMT_fee = Math.round(-b * 0.415667)
+                                    var fee_INTAMT = Math.round(-b * 0.5843337)
+                                    var c = Math.round(te[0].INTAMT + INTAMT_fee) + Math.round(te[0].fee + fee_INTAMT)
+
+                                    if (~~nopay <= 12) {
+                                        let dok = 0.06
+                                        let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                        bu1.push(all1.toFixed(0))
+                                        return bu1
+                                    } else if (~~nopay == 24) {
+                                        let dok = 0.09
+                                        let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+
+                                        bu1.push(all1.toFixed(0))
+                                        return bu1
+                                    }
+                                    else if (~~nopay == 30) {
+                                        let dok = 0.11
+                                        let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                        bu1.push(all1.toFixed(0))
+                                        return bu1
+                                    }
+                                    else if (~~nopay == 36) {
+
+                                        let dok = 0.13
+                                        let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                        bu1.push(all1.toFixed(0))
+                                        return bu1
+                                    }
+                                    else if (~~nopay == 42) {
+                                        let dok = 0.145
+                                        let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                        bu1.push(all1.toFixed(0))
+                                        return bu1
+                                    }
+                                    else if (~~nopay == 48) {
+
+                                        let dok = 0.16
+                                        let all1 = (balan + c) - ((bu[1] * +te[0].totalnopay) * dok)
+                                        bu1.push(all1 | 0)
+                                      
+                                        return bu1
+                                    }
+                                    else if (~~nopay == 54) {
+                                        let dok = 0.175
+                                        let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                        bu1.push(all1.toFixed(0))
+                                        return bu1
+                                    }
+                                    else if (~~nopay == 60) {
+                                        let dok = 0.19
+                                        let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                        bu1.push(all1.toFixed(0))
+                                        return bu1
+                                    }
+                                    else if (~~nopay == 66) {
+                                        let dok = 0.205
+                                        let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                        bu1.push(all1.toFixed(0))
+                                        return bu1
+                                    }
+                                    else if (~~nopay == 72) {
+                                        let dok = 0.22
+                                        let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                        bu1.push(all1.toFixed(0))
+                                        return bu1
+                                    } else {
+                                        let dok = 0.25
+                                        let all1 = (balan + c) - ((bu[1] * te[0].totalnopay) * dok)
+                                        bu1.push(all1.toFixed(0))
+                                    }
+
+                                    return bu1
+
+                                })
+
+                                var s1 = bu1 / 10000
+                                var s2 = Number((s1 * 100).toString().match(/^\d+/) / 100)
+                                var s3 = +s2 * 10000
+
+                                res.send({re1:req.re1,re2:s3.toFixed(0)})
+
+                            }).catch((error) => {
+                                console.log(error)
+                            })
+
+
+                    }).catch((error) => {
+                        console.log(error)
+                    })
+            }
+
+
+
+
+        }).catch((error) => {
+            console.log(error)
+        })
+
+
+}
+
+
+
+//-------------------------------------ขอส่วนลด----------------------------------------------------------------------------//
