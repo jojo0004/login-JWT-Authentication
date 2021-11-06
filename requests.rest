@@ -1,5 +1,5 @@
 GET https://api.cal.ap.ngrok.io/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTQwOTkzMDAwMDAxMCAgICAgICAgICAgIiwibWEiOiJQU0ZIUCIsImV4cGlyZXNJbiI6MzYwMCwiaWF0IjoxNjMwNTU2NDY1LCJleHAiOjE2MzA1NTY3NjV9.GS8lT6wTMOLYS899z8Zr_atlUTuHbgaUmMMHkkMSadk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMDEwNTUyMDAwNTE5MyIsIm1hIjoiTFNGSFAiLCJleHBpcmVzSW4iOjM2MDAsImlhdCI6MTYzMzc1MDY3NywiZXhwIjoxNjMzNzU0Mjc3fQ.MTxY2Z-toiYk7YsL2J5PZEDhgzYHNs38Vn8mq9seePQ
 
 ###
 
@@ -25,17 +25,17 @@ POST https://api.cal.ap.ngrok.io/login
 Content-Type: application/json
 
 {
-  "CUSCOD": "1409900367710",
-  "PASSWORD": "7710"
+  "CUSCOD": "1419900029431  ",
+  "PASSWORD": "9431"
 }
 
 ###
-GET https://api.cal.ap.ngrok.io/getcontno1/3-0000564           /PSFHP
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTQwOTkzMDAwMDAxMCAgICAgICAgICAgIiwibWEiOiJQU0ZIUCIsImV4cGlyZXNJbiI6MzYwMCwiaWF0IjoxNjMwNzQyNTQyLCJleHAiOjE2MzA3NDYxNDJ9.oeg6d6SLwpRXEr6xsjzQT4i2qUZqncOOzoIjrZkbhvg
+GET https://api.cal.ap.ngrok.io/getcontno1/8-0011339            /SFHP
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTQxOTkyMDAwMjE3OSAgICAgICAgICAgIiwibWEiOiJWU0ZIUCIsImV4cGlyZXNJbiI6MzYwMCwiaWF0IjoxNjMzOTQ4MzU4LCJleHAiOjE2MzM5NTE5NTh9.kOylR9YAf88gkAtRy7ZO_5pURDv0YieKxBTNLByQRTQ
 
 ###
-GET  https://api.cal.ap.ngrok.io/loans/PSFHP/3-0000010 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTQwOTkzMDAwMDAxMCAgICAgICAgICAgIiwibWEiOiJQU0ZIUCIsImV4cGlyZXNJbiI6MzYwMCwiaWF0IjoxNjMwNTcyOTA3LCJleHAiOjE2MzA1NzY1MDd9.3VI6C8zVGimXfzgcL90xJa-KeiwhTB_ifkZQvnH_z0E
+GET  https://api.cal.ap.ngrok.io/loans/personalId 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMDEwNTUyMDAwNTE5MyIsIm1hIjoiTFNGSFAiLCJleHBpcmVzSW4iOjM2MDAsImlhdCI6MTYzMzc1MDgwMywiZXhwIjoxNjMzNzU0NDAzfQ.rEWBTLImV7kskbttTX3A0m93OdNEqC8E-HEjBbuWkUk
 
 ###
-GET https://api.cal.ap.ngrok.io/getcusmast/1-0003380/LSFHP
+GET https://api.cal.ap.ngrok.io/loans/getCard/VSFHP/2-0002179
