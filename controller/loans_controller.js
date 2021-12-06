@@ -8,7 +8,7 @@ exports.getAllcard = (req, res, next) => {
     //  const personalId = req.user.user;
 
     const { ma, contno } = req.params;
-    console.log(ma, contno)
+   // console.log(ma, contno)
     const CREAT = new Date();
     const Year = CREAT.getFullYear();
     const day = CREAT.getDate();
@@ -20,24 +20,24 @@ exports.getAllcard = (req, res, next) => {
             if (row.length === 0) {
                 loansModel.getarpay_0({ contno: contno, ma: ma })
                     .then(([row]) => {
-                        console.log("row1")
+                     //   console.log("row1")
                         if (row.length === 0) {
                             res.send({ row, DAMT: 0, LPAYD: 0, LPAYA: 0 })
 
                         } else if (row[0].DAMT - +row[0].PAYMENT === 0) {
-                            console.log("row")
+                         //   console.log("row")
                             res.send({ row, DAMT: row[0].DAMT, LPAYD: row[0].LPAYD, LPAYA: row[0].LPAYA })
                         } else {
                             loansModel.getarpay({ contno: contno, ma: ma })
                                 .then(([row]) => {
-                                    console.log(row)
+                                  //  console.log(row)
                                     res.send({ row, DAMT: row[0].DAMT, LPAYD: row[0].LPAYD, LPAYA: row[0].LPAYA })
                                 })
                         }
 
                     })
             } else {
-                console.log("ro3")
+            //    console.log("ro3")
                 const re = row.reduce((sum, number) => {
                     return sum + +number.DAMT - +number.PAYMENT
                 }, 0)
@@ -128,7 +128,7 @@ exports.getchtan = (req, res, next) => {
             if (row.length === 0) {
                 loansModel.queryArpay({ ma, contno })
                     .then(([row]) => {
-                        console.log(row);
+                     //   console.log(row);
                         StratDate = new Date(row[0].sdate);
                         Stte = new Date();
                         ff = Stte.getTime() - StratDate.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
@@ -186,10 +186,10 @@ exports.getchtan = (req, res, next) => {
 
                     //  data_total1.push(~~total1.toFixed(2))
                     if (row.length === 1) {
-                        console.log('11=');
+                    //    console.log('11=');
                         res.send(su)
                     } else {
-                        console.log('1=');
+                    //    console.log('1=');
                         const ggg = generate(su, row)
 
                         res.send(ggg)
@@ -219,10 +219,10 @@ exports.getchtan = (req, res, next) => {
                     su.push({ a: re3.toFixed(2), b: re2.toFixed(2), c: 0, dat: Stte.toLocaleDateString(), datekang: ff, pay: row[0].payamt, dok: total1.toFixed(2), ton: total2.toFixed(2), kong: total.toFixed(2) })
 
                     if (row.length === 1) {
-                        console.log('22=');
+                   //     console.log('22=');
                         res.send(su)
                     } else {
-                        console.log('2=');
+                   //     console.log('2=');
                         const ggg = generate(su, row)
                         res.send(ggg)
                     }
@@ -248,11 +248,11 @@ function generate(su, row) {
             const total1 = TCSHPRC * (0.15 / 365) * ff
             const total2 = +payamt - +total1
             const total = TCSHPRC - total2
-            console.log('3=');
+           // console.log('3=');
             // console.log("tt",payamt ,data_dokkang,total1,total2 )
             if (total2 <= 0) {
                 // console.log("ร=",total2,total1)
-                console.log('4=');
+            //    console.log('4=');
                 const total = TCSHPRC - 0
                 let sum2 = +row[j + 1].payamt.toFixed(2)
                 data_total2.push({ dok: sum2 })
@@ -282,7 +282,7 @@ function generate(su, row) {
                 //res.send(ggg)
 
             } else {
-                console.log('5=');
+             //   console.log('5=');
                 // console.log("sum4=", +su[j].ton ) 
                 let sum = total2.toFixed(2)
                 data_total1.push({ ton: sum })
@@ -309,7 +309,7 @@ function generate(su, row) {
             }
 
         } else {
-            console.log('6=');
+         //   console.log('6=');
             const payamt = row[j + 1].payamt
             //  console.log("su=",su[j].ton,"row=",row[j + 1].payamt,"pay=",payamt.toFixed(2))
             const TCSHPRC = su[j].kong
@@ -318,7 +318,7 @@ function generate(su, row) {
             const total = TCSHPRC - total2
             //  console.log("j=",+payamt , +total1)
             if (total2 <= 0) {
-                console.log('7=');
+             //   console.log('7=');
                 //       console.log("j=",total2,total1)
                 const total = TCSHPRC - 0
                 let sum2 = +row[j + 1].payamt.toFixed(2)
@@ -369,7 +369,7 @@ function generate(su, row) {
 
             //    }
             else {
-                console.log('8=');
+            //    console.log('8=');
                 let sum = total2.toFixed(2)
                 data_total1.push({ ton: sum })
 
@@ -503,12 +503,12 @@ exports.getchtan1 = (req, res, next) => {
                         const NCARCST = row[0].NCARCST
                         const TOT_UPAY = row[0].TOT_UPAY
                         for (i = 0; i <= row[0].T_NOPAY - 1; i++) {
-                           
+
                             if (s4 <= TOT_UPAY) {
                                 var kong = su[su.length - 1].kong
                                 var value = kong / TOT_UPAY
                                 var s = su[su.length - 1].c
-                               
+
                                 // console.log(s)
                                 const CREAT = new Date(s);
                                 const Year = CREAT.getFullYear();
@@ -518,7 +518,7 @@ exports.getchtan1 = (req, res, next) => {
                                 const Year1 = StratDate.getFullYear();
                                 const Month1 = StratDate.getMonth() + 1;
                                 var lastDay = new Date(new Date(Year1, Month1, 1) - 1).getDate();
-                              
+
                                 // StratDate = new Date(row[0].sdate);
                                 const day1 = CREAT.getDate();
                                 Stte = new Date(Year, Month, day1);
@@ -527,21 +527,21 @@ exports.getchtan1 = (req, res, next) => {
                                 // ff = EndDate.getTime() - Stte.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
                                 // ff = Math.floor(ff / (1000 * 60 * 60 * 24));
                                 //  console.log(row[i].paydt.toLocaleDateString());
-                               
+
                                 const total = NCARCST - s1
                                 const total1 = total * (0.24 / 365) * lastDay
-                             
+
                                 var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
-                                const total2 = kong  
-                               // console.log(kong-s4);
+                                const total2 = kong
+                                // console.log(kong-s4);
                                 var s3 = Number((total2 * 100).toString().match(/^\d+/) / 100)
                                 s1 += total2
-                                const total5 = kong-s4
+                                const total5 = kong - s4
                                 var s4 = Number((total5 * 100).toString().match(/^\d+/) / 100)
 
-                                su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: kong + s2, dok: s2,dok2: 0, ton1: total2, ton2: 0, delay_dok: 0, ddate: "-", payamt: 0, kong: s4, delay: 0 })
-                               // res.send(su)
-                            }else{
+                                su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: kong + s2, dok: s2, dok2: 0, ton1: total2, ton2: 0, delay_dok: 0, ddate: "-", payamt: 0, kong: s4, delay: 0 })
+                                // res.send(su)
+                            } else {
                                 const CREAT = new Date(row[0].FDATE);
                                 const Year = CREAT.getFullYear();
                                 const day = 1;
@@ -550,15 +550,15 @@ exports.getchtan1 = (req, res, next) => {
                                 const Year1 = StratDate.getFullYear();
                                 const Month1 = StratDate.getMonth() + 1;
                                 var lastDay = new Date(new Date(Year1, Month1, 1) - 1).getDate();
-    
+
                                 // StratDate = new Date(row[0].sdate);
                                 const day1 = CREAT.getDate();
                                 Stte = new Date(Year, Month, day1);
-                               // console.log("day", Stte, lastDay);
+                                // console.log("day", Stte, lastDay);
                                 // EndDate = new Date(row[i].paydt)
                                 // ff = EndDate.getTime() - Stte.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
                                 // ff = Math.floor(ff / (1000 * 60 * 60 * 24));
-    
+
                                 const total = NCARCST - s1
                                 const total1 = total * (0.24 / 365) * lastDay
                                 var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
@@ -569,9 +569,9 @@ exports.getchtan1 = (req, res, next) => {
                                 const total5 = NCARCST - s1
                                 var s4 = Number((total5 * 100).toString().match(/^\d+/) / 100)
                                 //   console.log(TOT_UPAY);
-                                su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: TOT_UPAY, dok: s2,dok2: 0, ton1: total2, ton2: 0, delay_dok: 0, ddate: "-", payamt: 0, kong: s4, delay: 0 })
+                                su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: TOT_UPAY, dok: s2, dok2: 0, ton1: total2, ton2: 0, delay_dok: 0, ddate: "-", payamt: 0, kong: s4, delay: 0 })
                             }
-                           
+
 
                         }
                         res.send(su)
@@ -610,27 +610,41 @@ exports.getchtan1 = (req, res, next) => {
                             const total1 = total * (0.28 / 365) * lastDay // ดอกเบี้ยในเดือนนั้น
                             var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
                             var ton_1 = TOT_UPAY - s2      //ค่างวด ลบ กับ ดอกเบี้ยในเดือนนั้น จะได้เงินต้นของเดือนนั้น (ไม่ได้คิดจากเงินที่จ่ายมา)
-                            const dok_kang = row[i].payamt + su[su.length-1].dok_kang //เงินที่จ่าย ลบ ดอกเบี้ยคงเหลือของวดที่แล้ว จะ == ชำระดอกเบียคงเหลืองวดที่แล้ว
-                            const total2 = dok_kang - s2  //เงินที่จ่าย ลบดอกเบี้ย จะได้เงินต้น
-                            const total_s3 = s4 * (0.28 / 365) * ff //ดอกเบียล่าช้า ( เงินต้นทั้งหมด= เงินที่จ่าย - ดอกเบี้ย)
+                            const dok_kang = row[i].payamt + su[su.length - 1].dok_kang //เงินที่จ่าย ลบ ดอกเบี้ยคงเหลือของวดที่แล้ว จะ == ชำระดอกเบียคงเหลืองวดที่แล้ว
+                            const total_s3 = su[su.length - 1].kong * (0.28 / 365) * ff //ดอกเบียล่าช้า ( เงินต้นทั้งหมด= เงินที่จ่าย - ดอกเบี้ย)
                             var s5 = Number((total_s3 * 100).toString().match(/^\d+/) / 100)
-                            var tonjing = total2 - s5
-                            console.log(tonjing)
-                            if(tonjing < 0)
-                            {
-                               
-                                s1 += 0
+                            const ngen = dok_kang - s5  //เงินที่จ่าย ลบดอกเบี้ยล่าช้า จะได้เงินที่ต้องไปจ่ายดอกเบี้ย
+                            const total2 = ngen - s2  //เงินที่จ่าย ลบดอกเบี้ย จะได้เงินต้น                                                  
+                            var tonjing = total2 //เงินต้นลบดอกเบี้ยล่าช้า
+                         //   console.log("s=", ngen, "ดอกเบี้ยล่าช้า=", s5, "ดอกค้าง=", su[su.length - 1].dok_kang, row[i].payamt, "คงเหลือ=", su[su.length - 1].kong, "วันจ่าย=", row[i].paydt.toLocaleDateString(), tonjing)
+                            if (tonjing < 0) {
+                                if (su[su.length - 1].dok_kang == 0) {
+                                    s1 += 0
+                                    const kong = NCARCST - s1
+                                    var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
+                                    su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2 + tonjing, dok_kang: tonjing, ton1: ton_1, ton2: total2, delay_dok: s5, pay_dok_kang: su[su.length - 1].dok_kang, pay_dok: s5, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
+                                } else {
+                                    s1 += 0
+                                    const kong = NCARCST - s1
+                                    var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
+                                    if (s2 + tonjing < 0) {
+                                        su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2 + tonjing, dok_kang: tonjing, ton1: ton_1, ton2: total2, delay_dok: s5, pay_dok_kang: su[su.length - 1].dok_kang, pay_dok: dok_kang, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
+                                    } else {
+                                        su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2 + tonjing, dok_kang: tonjing, ton1: ton_1, ton2: total2, delay_dok: s5, pay_dok_kang: su[su.length - 1].dok_kang, pay_dok: s5, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
+                                    }
+
+
+                                }
+
+                            }
+                            else {
+                                s1 += tonjing
                                 const kong = NCARCST - s1
                                 var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
-                                su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok:s2,dok2: Number(( dok_kang * 100).toString().match(/^\d+/) / 100),dok_kang:tonjing,ton1:ton_1, ton2: total2, delay_dok: s5,pay_dok_kang:su[su.length-1].dok_kang,pay_dok:s5 + tonjing, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
-                            }else{
-                                s1 += tonjing
-                                const kong = NCARCST - s1               
-                                var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
-                                su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2,dok2: s2,dok_kang:0,ton1:ton_1, ton2: total2, delay_dok: s5,pay_dok_kang:su[su.length-1].dok_kang,pay_dok:s5, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
+                                su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2, dok_kang: 0, ton1: ton_1, ton2: total2, delay_dok: s5, pay_dok_kang: su[su.length - 1].dok_kang, pay_dok: s5, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
                             }
                             // var total_ton = Number((tonjing * 100).toString().match(/^\d+/) / 100)
-                          
+
                         } else if (s4 <= TOT_UPAY) {
                             var kong = su[su.length - 1].kong
                             var value = kong / TOT_UPAY
@@ -663,9 +677,24 @@ exports.getchtan1 = (req, res, next) => {
                             const total5 = NCARCST - s1
                             var s4 = Number((total5 * 100).toString().match(/^\d+/) / 100)
                             // console.log(NCARCST , s1,total5,Math.abs(total5),s2,total2);
-                            su.push({ a: 1, b: 0, c: 0, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: kong + s2, dok: s2,dok2: s2,dok_kang:0,ton1:ton_1, ton2: s3, delay_dok: 0, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: 0 })
+                            su.push({ a: 1, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: kong + s2, dok: s2, dok2: s2, dok_kang: 0, ton1: ton_1, ton2: s3, delay_dok: 0, pay_dok_kang: su[su.length - 1].dok_kang, pay_dok: 0, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: 0 })
 
-                        } else {
+                        }
+                        //   else if (su[su.length-1].dok_kang < 0){
+                        //       const total = NCARCST - s1
+                        //       const total1 = total * (0.28 / 365) * lastDay
+                        //       var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
+                        //       var ton_1 = TOT_UPAY - s2      //ค่างวด ลบ กับ ดอกเบี้ยในเดือนนั้น จะได้เงินต้นของเดือนนั้น (ไม่ได้คิดจากเงินที่จ่ายมา)
+                        //       const dok_kang = row[i].payamt + su[su.length-1].dok_kang //เงินที่จ่าย ลบ ดอกเบี้ยคงเหลือของวดที่แล้ว จะ == ชำระดอกเบียคงเหลืองวดที่แล้ว
+                        //       const total2 = dok_kang - s2  //เงินที่จ่าย(หลังจากลบกับดอกเบี้ยคงเหลืองวดที่แล้ว) ลบดอกเบี้ย จะได้เงินต้น
+                        //       var s3 = Number((total2 * 100).toString().match(/^\d+/) / 100)
+                        //       s1 += total2
+                        //       const kong = NCARCST - s1
+                        //       var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
+
+                        //       su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2,dok2: s2,dok_kang:0,ton1:ton_1, ton2: s3, delay_dok: 0,pay_dok_kang:s3,pay_dok:0, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: 0 })
+                        //   }
+                        else {
                             const total = NCARCST - s1
                             const total1 = total * (0.28 / 365) * lastDay
                             var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
@@ -676,7 +705,7 @@ exports.getchtan1 = (req, res, next) => {
                             const kong = NCARCST - s1
                             var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
 
-                            su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2,dok2: s2,dok_kang:0,ton1:ton_1, ton2: s3, delay_dok: 0, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: 0 })
+                            su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2, dok_kang: 0, ton1: ton_1, ton2: s3, delay_dok: 0, pay_dok_kang: 0, pay_dok: 0, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: 0 })
                         }
 
 
@@ -687,7 +716,7 @@ exports.getchtan1 = (req, res, next) => {
                         var value = kong / TOT_UPAY
                         var s = su[su.length - 1].c
 
-                        console.log("day", value, TOT_UPAY);
+                    //    console.log("day", value, TOT_UPAY);
 
                         for (i = 1; s4 >= TOT_UPAY; i++) {
                             const CREAT = new Date(s);
@@ -703,10 +732,12 @@ exports.getchtan1 = (req, res, next) => {
                             const day1 = CREAT.getDate();
                             Stte = new Date(Year, Month, day1);
 
-                            // EndDate = new Date(row[i].paydt)
-                            // ff = EndDate.getTime() - Stte.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
-                            // ff = Math.floor(ff / (1000 * 60 * 60 * 24));
-                            //  console.log(row[i].paydt.toLocaleDateString());
+                            EndDate = new Date()
+                            ff = EndDate.getTime() - Stte.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
+                            ff = Math.floor(ff / (1000 * 60 * 60 * 24));
+                            //  console.log(ff);
+                            const total_s3 = su[su.length - 1].kong * (0.28 / 365) * ff //ดอกเบียล่าช้า ( เงินต้นทั้งหมด= เงินที่จ่าย - ดอกเบี้ย)
+                            var s5 = Number((total_s3 * 100).toString().match(/^\d+/) / 100)
                             const total = NCARCST - s1
                             const total1 = total * (0.28 / 365) * lastDay
                             var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
@@ -717,7 +748,7 @@ exports.getchtan1 = (req, res, next) => {
                             const total5 = NCARCST - s1
                             var s4 = Number((total5 * 100).toString().match(/^\d+/) / 100)
                             //   console.log(s4);
-                            su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[0].TOT_UPAY, dok: s2,dok2: 0,dok_kang:0,ton1:ton_1, ton2: 0, delay_dok: 0, ddate: "-", payamt: 0, kong: s4, delay: 0 })
+                            su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[0].TOT_UPAY, dok: s2, dok2: 0, dok_kang: 0, ton1: ton_1, ton2: 0, delay_dok: s5, pay_dok_kang: 0, pay_dok: 0, ddate: "-", payamt: 0, kong: s4, delay: ff })
 
 
                         }
@@ -739,10 +770,11 @@ exports.getchtan1 = (req, res, next) => {
                             const day1 = CREAT.getDate();
                             Stte = new Date(Year, Month, day1);
                             // console.log("day",Stte,StratDate,Year, Month);
-                            // EndDate = new Date(row[i].paydt)
-                            // ff = EndDate.getTime() - Stte.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
-                            // ff = Math.floor(ff / (1000 * 60 * 60 * 24));
-                            
+                            EndDate = new Date()
+                            ff = EndDate.getTime() - Stte.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
+                            ff = Math.floor(ff / (1000 * 60 * 60 * 24));
+                            const total_s3 = su[su.length - 1].kong * (0.28 / 365) * ff //ดอกเบียล่าช้า ( เงินต้นทั้งหมด= เงินที่จ่าย - ดอกเบี้ย)
+                            var s5 = Number((total_s3 * 100).toString().match(/^\d+/) / 100)
                             const total = NCARCST - s1
                             const total1 = total * (0.28 / 365) * lastDay
                             var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
@@ -752,22 +784,22 @@ exports.getchtan1 = (req, res, next) => {
                             s1 += total2
                             const total5 = NCARCST - s1
                             var s4 = Number((total5 * 100).toString().match(/^\d+/) / 100)
-  console.log("aa",s3);
-                            su.push({ a: 1, b: 0, c: 0, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: kong + s2, dok: s2,dok2: 0,dok_kang:0,ton1:s3, ton2: 0, delay_dok: 0, ddate: "-", payamt: 0, kong: s4, delay: 0 })
+                            // console.log("12", ff);
+                            su.push({ a: 1, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: kong + s2, dok: s2, dok2: 0, dok_kang: 0, ton1: s3, ton2: 0, delay_dok: s5, pay_dok_kang: 0, pay_dok: 0, ddate: "-", payamt: 0, kong: s4, delay: 0 })
                             res.send(su)
                         } else {
                             res.send(su)
                         }
 
                     }
-                   
-                     else {
+
+                    else {
                         res.send(su)
                     }
-                     //-----------คิดหลังจากมีการจ่ายค่างวดมาแล้ว------------------------//
+                    //-----------คิดหลังจากมีการจ่ายค่างวดมาแล้ว------------------------//
                 }
                 // สัญญา ที่เริ่มก่อน วันที่ 2020/08/01
-                
+
                 else {
                     // สัญญา ที่เริ่มหลังจาก วันที่ 2020/08/01
                     for (i = 0; i <= row.length - 1; i++) {
@@ -787,80 +819,204 @@ exports.getchtan1 = (req, res, next) => {
                         EndDate = new Date(row[i].paydt)
                         ff = EndDate.getTime() - Stte.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
                         ff = Math.floor(ff / (1000 * 60 * 60 * 24));
+
                         if (ff >= 8) {
+
                             const total = NCARCST - s1
-                            const total1 = total * (0.24 / 365) * lastDay // ดอกเบี้ยในเดือนนั้น
+                            const total1 = total * (0.24 / 365) * lastDay // ดอกเบี้ยในเดือนนั้น             
                             var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
                             var ton_1 = TOT_UPAY - s2      //ค่างวด ลบ กับ ดอกเบี้ยในเดือนนั้น จะได้เงินต้นของเดือนนั้น (ไม่ได้คิดจากเงินที่จ่ายมา)
-                            const total2 = row[i].payamt - s2 //เงินที่จ่าย ลบดอกเบี้ย จะได้เงินต้น
-                            const total_s3 = total2 * (0.24 / 365) * ff //ดอกเบียล่าช้า ( เงินต้น= เงินที่จ่าย - ดอกเบี้ย)
+
+                            //-------------------------------------------------------------------------------------------------------------------------------//
+
+
+                            //    console.log("s=", ngen, "ดอกเบี้ยล่าช้า=", s5, "ดอกค้าง=", su[su.length - 1].dok_kang, row[i].payamt, "คงเหลือ=", su[su.length - 1].kong, "วันจ่าย=", row[i].paydt.toLocaleDateString(), tonjing)
+                            if (su.length == 0) {
+                              //  console.log("sdafg5")
+                                const total_s3 = ton_1 * (0.24 / 365) * ff //ดอกเบียล่าช้า ( เงินต้นงวดนั้น= เงินที่จ่าย - ดอกเบี้ย)
+                                var s5 = Number((total_s3 * 100).toString().match(/^\d+/) / 100)
+                                const ngen = row[i].payamt - s5  //เงินที่จ่าย ลบดอกเบี้ยล่าช้า จะได้เงินที่ต้องไปจ่ายดอกเบี้ย
+                                const total2 = ngen - s2  //เงินที่จ่าย ลบดอกเบี้ย จะได้เงินต้น                                                  
+                                var tonjing = total2 //เงินต้นลบดอกเบี้ยล่าช้า 
+                                s1 += tonjing
+                                const kong = NCARCST - s1
+                                var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
+                                su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2, dok_kang: 0, ton1: ton_1, ton2: total2, delay_dok: s5, pay_dok_kang: 0, pay_dok: s5, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
+                            } else {
+                               
+                                const dok_kang = row[i].payamt + su[su.length - 1].dok_kang //เงินที่จ่าย ลบ ดอกเบี้ยคงเหลือของวดที่แล้ว จะ == ชำระดอกเบียคงเหลืองวดที่แล้ว
+                              //  console.log("sdafg4")
+                                const total_s3 = ton_1 * (0.24 / 365) * ff //ดอกเบียล่าช้า ( เงินต้นงวดนั้น= เงินที่จ่าย - ดอกเบี้ย)
+                                var s5 = Number((total_s3 * 100).toString().match(/^\d+/) / 100)
+                                const ngen = dok_kang - s5  //เงินที่จ่าย ลบดอกเบี้ยล่าช้า จะได้เงินที่ต้องไปจ่ายดอกเบี้ย
+                                const total2 = ngen - s2  //เงินที่จ่าย ลบดอกเบี้ย จะได้เงินต้น                                                  
+                                var tonjing = total2 //เงินต้นลบดอกเบี้ยล่าช้า
+
+                                if (tonjing < 0) {
+                                    if (su[su.length - 1].dok_kang == 0) {
+                                        s1 += 0
+                                        const kong = NCARCST - s1
+                                        var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
+                                        su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2 + tonjing, dok_kang: tonjing, ton1: ton_1, ton2: total2, delay_dok: s5, pay_dok_kang: su[su.length - 1].dok_kang, pay_dok: s5, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
+                                    } else {
+                                        s1 += 0
+                                        const kong = NCARCST - s1
+                                        var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
+                                        if (s2 + tonjing < 0) {
+                                            su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2 + tonjing, dok_kang: tonjing, ton1: ton_1, ton2: total2, delay_dok: s5, pay_dok_kang: su[su.length - 1].dok_kang, pay_dok: dok_kang, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
+                                        } else {
+                                            su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2 + tonjing, dok_kang: tonjing, ton1: ton_1, ton2: total2, delay_dok: s5, pay_dok_kang: su[su.length - 1].dok_kang, pay_dok: s5, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
+                                        }
+
+
+                                    }
+
+                                }
+                                else {
+                                //    console.log("sdafg3")
+                                    s1 += tonjing
+                                    const kong = NCARCST - s1
+                                    var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
+                                    su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2, dok_kang: 0, ton1: ton_1, ton2: total2, delay_dok: s5, pay_dok_kang: su[su.length - 1].dok_kang, pay_dok: s5, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
+                                }
+                                // var total_ton = Number((tonjing * 100).toString().match(/^\d+/) / 100)
+                            }
+
+
+
+                            //------------------------------------------------------------------------------------//                       
+                            //      const total2 = row[i].payamt - s2 //เงินที่จ่าย ลบดอกเบี้ย จะได้เงินต้น
+                            //      const total_s3 = total2 * (0.24 / 365) * ff //ดอกเบียล่าช้า ( เงินต้น= เงินที่จ่าย - ดอกเบี้ย)
+                            //      var s5 = Number((total_s3 * 100).toString().match(/^\d+/) / 100)
+                            //      var tonjing = total2 - s5
+                            //      // var total_ton = Number((tonjing * 100).toString().match(/^\d+/) / 100)
+                            //      s1 += tonjing
+                            //      const kong = NCARCST - s1
+                            //      // console.log(total2 ,s2,  s5, total_ton,total2,tonjing ,s1)
+                            //      var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
+                            //      su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2, dok_kang: 0, ton1: ton_1, ton2: total2, delay_dok: s5, pay_dok_kang: 0, pay_dok: 0, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
+
+                       } 
+                     else if (s4 <= TOT_UPAY) {
+                        //   console.log("sdafg2")
+                           var kong = su[su.length - 1].kong
+                           var value = kong / TOT_UPAY
+                           var s = su[su.length - 1].c
+                           // console.log(s)
+                           const CREAT = new Date(s);
+                           const Year = CREAT.getFullYear();
+                           const day = 1;
+                           const Month = CREAT.getMonth() + 1;
+                           var StratDate = new Date(Year, Month, day)
+                           const Year1 = StratDate.getFullYear();
+                           const Month1 = StratDate.getMonth() + 1;
+                           var lastDay = new Date(new Date(Year1, Month1, 1) - 1).getDate();
+
+                           // StratDate = new Date(row[0].sdate);
+                           const day1 = CREAT.getDate();
+                           Stte = new Date(Year, Month, day1);
+                           // console.log("day",Stte,StratDate,Year, Month);
+                           // EndDate = new Date(row[i].paydt)
+                           // ff = EndDate.getTime() - Stte.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
+                           // ff = Math.floor(ff / (1000 * 60 * 60 * 24));
+                           //  console.log(row[i].paydt.toLocaleDateString());
+                           const total = NCARCST - s1
+                           const total1 = total * (0.24 / 365) * lastDay
+                           var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
+                           var ton_1 = TOT_UPAY - s2
+                           const total2 = row[i].payamt - s2
+                           var s3 = Number((total2 * 100).toString().match(/^\d+/) / 100)
+                           s1 += total2
+                           const total5 = NCARCST - s1
+                           var s4 = Number((total5 * 100).toString().match(/^\d+/) / 100)
+                           // console.log(NCARCST , s1,total5,Math.abs(total5),s2,total2);
+                           su.push({ a: 1, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: kong + s2, dok: s2, dok2: s2, dok_kang: 0, ton1: ton_1, ton2: s3, delay_dok: 0, pay_dok_kang: su[su.length - 1].dok_kang, pay_dok: ton_1, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: 0 })
+
+                       } else {
+                        if (su.length == 0) {
+                            const total = NCARCST - s1
+                            const total1 = total * (0.24 / 365) * lastDay
+                            var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
+                            var ton_1 = TOT_UPAY - s2
+                            const total2 = row[i].payamt - s2               
+                            var s3 = Number((total2 * 100).toString().match(/^\d+/) / 100)
+                            s1 += total2
+                            const kong = NCARCST - s1
+                            var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
+                          //  console.log("sdafg1")
+                            su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2, dok_kang: 0, ton1: ton_1, ton2: s3, delay_dok: 0, pay_dok_kang: 0, pay_dok: 0, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: 0 })
+                        }else{///------------------------------------//
+                            const total = NCARCST - s1
+                            const total1 = total * (0.24 / 365) * lastDay                          
+                            var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
+                            var ton_1 = TOT_UPAY - s2                        
+                            const dok_kang = row[i].payamt + su[su.length - 1].dok_kang //เงินที่จ่าย ลบ ดอกเบี้ยคงเหลือของวดที่แล้ว จะ == ชำระดอกเบียคงเหลืองวดที่แล้ว
+                          //  console.log("sdafg4")
+                            const total_s3 = ton_1 * (0.24 / 365) * ff //ดอกเบียล่าช้า ( เงินต้นงวดนั้น= เงินที่จ่าย - ดอกเบี้ย)
                             var s5 = Number((total_s3 * 100).toString().match(/^\d+/) / 100)
-                            var tonjing = total2 - s5
-                            // var total_ton = Number((tonjing * 100).toString().match(/^\d+/) / 100)
-                            s1 += tonjing
-                            const kong = NCARCST - s1
-                            // console.log(total2 ,s2,  s5, total_ton,total2,tonjing ,s1)
-                            var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
-                            su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2,dok2: s2, ton1: ton_1,ton2:total2, delay_dok: s5, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
-                        } else if (s4 <= TOT_UPAY) {
-                            var kong = su[su.length - 1].kong
-                            var value = kong / TOT_UPAY
-                            var s = su[su.length - 1].c
-                            // console.log(s)
-                            const CREAT = new Date(s);
-                            const Year = CREAT.getFullYear();
-                            const day = 1;
-                            const Month = CREAT.getMonth() + 1;
-                            var StratDate = new Date(Year, Month, day)
-                            const Year1 = StratDate.getFullYear();
-                            const Month1 = StratDate.getMonth() + 1;
-                            var lastDay = new Date(new Date(Year1, Month1, 1) - 1).getDate();
+                            const ngen = dok_kang - s5  //เงินที่จ่าย ลบดอกเบี้ยล่าช้า จะได้เงินที่ต้องไปจ่ายดอกเบี้ย
+                            const total2 = ngen - s2  //เงินที่จ่าย ลบดอกเบี้ย จะได้เงินต้น                                                  
+                            var tonjing = total2 //เงินต้น
 
-                            // StratDate = new Date(row[0].sdate);
-                            const day1 = CREAT.getDate();
-                            Stte = new Date(Year, Month, day1);
-                            // console.log("day",Stte,StratDate,Year, Month);
-                            // EndDate = new Date(row[i].paydt)
-                            // ff = EndDate.getTime() - Stte.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
-                            // ff = Math.floor(ff / (1000 * 60 * 60 * 24));
-                            //  console.log(row[i].paydt.toLocaleDateString());
-                            const total = NCARCST - s1
-                            const total1 = total * (0.24 / 365) * lastDay
-                            var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
-                            var ton_1 = TOT_UPAY - s2   
-                            const total2 = row[i].payamt - s2
-                            var s3 = Number((total2 * 100).toString().match(/^\d+/) / 100)
-                            s1 += total2
-                            const total5 = NCARCST - s1
-                            var s4 = Number((total5 * 100).toString().match(/^\d+/) / 100)
-                            // console.log(NCARCST , s1,total5,Math.abs(total5),s2,total2);
-                            su.push({ a: 1, b: 0, c: 0, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: kong + s2, dok: s2,dok2: s2, ton1: ton_1,ton2:s3, delay_dok: 0, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: 0 })
+                            if (tonjing < 0) {
+                                if (su[su.length - 1].dok_kang == 0) {
+                                    s1 += 0
+                                    const kong = NCARCST - s1
+                                    var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
+                                    su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2 + tonjing, dok_kang: tonjing, ton1: ton_1, ton2: total2, delay_dok: 0, pay_dok_kang: su[su.length - 1].dok_kang, pay_dok: s5, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
+                                } else {
+                                    s1 += 0
+                                    const kong = NCARCST - s1
+                                    var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
+                                    if (s2 + tonjing < 0) {
+                                        su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2 + tonjing, dok_kang: tonjing, ton1: ton_1, ton2: total2, delay_dok: 0, pay_dok_kang: su[su.length - 1].dok_kang, pay_dok: dok_kang, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
+                                    } else {
+                                        su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2 + tonjing, dok_kang: tonjing, ton1: ton_1, ton2: total2, delay_dok: 0, pay_dok_kang: su[su.length - 1].dok_kang, pay_dok: s5, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
+                                    }
 
-                        } else {
-                            const total = NCARCST - s1
-                            const total1 = total * (0.24 / 365) * lastDay
-                            var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
-                            var ton_1 = TOT_UPAY - s2   
-                            const total2 = row[i].payamt - s2
-                            var s3 = Number((total2 * 100).toString().match(/^\d+/) / 100)
-                            s1 += total2
-                            const kong = NCARCST - s1
-                            var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
 
-                            su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2,dok2: s2, ton1: ton_1,ton2:s3, delay_dok: 0, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: 0 })
+                                }
+
+                            }
+                            else {
+                            //    console.log("sdafg3")
+                                s1 += tonjing
+                                const kong = NCARCST - s1
+                                var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
+                                su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2, dok_kang: 0, ton1: ton_1, ton2: total2, delay_dok: 0, pay_dok_kang: su[su.length - 1].dok_kang, pay_dok: s5, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: ff })
+                            }
+
+                            //----------------------------------------------------------------------//
+                        //    const total = NCARCST - s1
+                        //    const total1 = total * (0.24 / 365) * lastDay                          
+                        //    var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
+                        //    var ton_1 = TOT_UPAY - s2
+                        //    const total2 = row[i].payamt - s2
+                        //    + su[su.length - 1].dok_kang
+                        //    var s3 = Number((total2 * 100).toString().match(/^\d+/) / 100)
+                        //    s1 += total2
+                        //    const kong = NCARCST - s1
+                        //    var s4 = Number((kong * 100).toString().match(/^\d+/) / 100)
+                        //    console.log("sdafg1")
+                        //    su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2, dok_kang: 0, ton1: ton_1, ton2: s3, delay_dok: 0, pay_dok_kang:su[su.length - 1].dok_kang, pay_dok: 0, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: 0 })
+                            //--------------------------------------------------------------------------------//
                         }
+                         
+                       }
 
 
                     }
                     //   console.log(su[22].kong,su.length)
                     if (su[su.length - 1].kong != 0) {
+                       
                         var kong = su[su.length - 1].kong
                         var value = kong / TOT_UPAY
                         var s = su[su.length - 1].c
-
-                        console.log("day", value, TOT_UPAY);
+                       
+                      //  console.log("day", value, TOT_UPAY);
 
                         for (i = 1; s4 >= TOT_UPAY; i++) {
+                            
                             const CREAT = new Date(s);
                             const Year = CREAT.getFullYear();
                             const day = 1;
@@ -869,28 +1025,33 @@ exports.getchtan1 = (req, res, next) => {
                             const Year1 = StratDate.getFullYear();
                             const Month1 = StratDate.getMonth() + 1;
                             var lastDay = new Date(new Date(Year1, Month1, 1) - 1).getDate();
-
+                          
                             // StratDate = new Date(row[0].sdate);
                             const day1 = CREAT.getDate();
                             Stte = new Date(Year, Month, day1);
 
-                            // EndDate = new Date(row[i].paydt)
-                            // ff = EndDate.getTime() - Stte.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
-                            // ff = Math.floor(ff / (1000 * 60 * 60 * 24));
+                             EndDate = new Date()
+                             ff = EndDate.getTime() - Stte.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
+                             ff = Math.floor(ff / (1000 * 60 * 60 * 24));
                             //  console.log(row[i].paydt.toLocaleDateString());
                             const total = NCARCST - s1
                             const total1 = total * (0.24 / 365) * lastDay
                             var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
-                            var ton_1 = TOT_UPAY - s2 
+                            var ton_1 = TOT_UPAY - s2
+                            const total_s3 = ton_1 * (0.24 / 365) * ff //ดอกเบียล่าช้า ( เงินต้นงวดนั้น= เงินที่จ่าย - ดอกเบี้ย)
+                            var s5 = Number((total_s3 * 100).toString().match(/^\d+/) / 100)
                             const total2 = TOT_UPAY - s2
                             var s3 = Number((total2 * 100).toString().match(/^\d+/) / 100)
+                           
                             s1 += total2
                             const total5 = NCARCST - s1
                             var s4 = Number((total5 * 100).toString().match(/^\d+/) / 100)
+                            
                             //   console.log(s4);
-                            su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[0].TOT_UPAY, dok: s2,dok2: 0, ton1: ton_1,ton2:s3, delay_dok: 0, ddate: "-", payamt: 0, kong: s4, delay: 0 })
-
-
+                            su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[0].TOT_UPAY, dok: s2, dok2: 0, dok_kang: 0, ton1: ton_1, ton2: 0,pay_dok_kang: 0, pay_dok: 0, delay_dok: s5, ddate: "-", payamt: 0, kong: s4, delay: ff })
+                         // su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2: s2, ton1: ton_1, ton2: s3, delay_dok: 0, ddate: row[i].paydt.toLocaleDateString(), payamt: row[i].payamt, kong: s4, delay: 0 })
+                       //   su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[i].TOT_UPAY, dok: s2, dok2:0, dok_kang: 0, ton1: ton_1, ton2: total2, delay_dok: s5, pay_dok_kang: 0, pay_dok: s5, ddate:  "-", payamt: 0, kong: s4, delay: ff })
+                      //   console.log("sdafg9")
                         }
                         if (s4 <= TOT_UPAY) {
                             var kong = su[su.length - 1].kong
@@ -910,21 +1071,23 @@ exports.getchtan1 = (req, res, next) => {
                             const day1 = CREAT.getDate();
                             Stte = new Date(Year, Month, day1);
                             // console.log("day",Stte,StratDate,Year, Month);
-                            // EndDate = new Date(row[i].paydt)
-                            // ff = EndDate.getTime() - Stte.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
-                            // ff = Math.floor(ff / (1000 * 60 * 60 * 24));
+                             EndDate = new Date()
+                             ff = EndDate.getTime() - Stte.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
+                             ff = Math.floor(ff / (1000 * 60 * 60 * 24));
                             //  console.log(row[i].paydt.toLocaleDateString());
                             const total = NCARCST - s1
                             const total1 = total * (0.24 / 365) * lastDay
                             var s2 = Number((total1 * 100).toString().match(/^\d+/) / 100)
-                            var ton_1 = TOT_UPAY - s2 
+                            var ton_1 = TOT_UPAY - s2                  
+                            const total_s3 = ton_1 * (0.24 / 365) * ff //ดอกเบียล่าช้า ( เงินต้นงวดนั้น= เงินที่จ่าย - ดอกเบี้ย)
+                            var s5 = Number((total_s3 * 100).toString().match(/^\d+/) / 100)
                             const total2 = kong
                             var s3 = Number((total2 * 100).toString().match(/^\d+/) / 100)
                             s1 += total2
                             const total5 = NCARCST - s1
                             var s4 = Number((total5 * 100).toString().match(/^\d+/) / 100)
-
-                            su.push({ a: 1, b: 0, c: 0, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: kong + s2, dok: s2,dok2: 0, ton1:total2,ton2:s3, delay_dok: 0, ddate: "-", payamt: 0, kong: s4, delay: 0 })
+                           // su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: row[0].TOT_UPAY, dok: s2, dok2: 0, dok_kang: 0, ton1: ton_1, ton2: 0,pay_dok_kang: 0, pay_dok: 0, delay_dok: 0, ddate: "-", payamt: 0, kong: s4, delay: ff })
+                            su.push({ a: 0, b: 0, c: Stte, dat: Stte.toLocaleDateString(), datekang: lastDay, pay: kong + s2, dok: s2, dok2: 0, dok_kang: 0, ton1: total2, ton2: 0,pay_dok_kang: 0, pay_dok: 0, delay_dok: s5, ddate: "-", payamt: 0, kong: s4, delay: 0 })
                             res.send(su)
                         } else {
                             res.send(su)
@@ -969,11 +1132,11 @@ function generate1(su, row) {
             const total1 = TCSHPRC * (0.15 / 365) * ff
             const total2 = +payamt - +total1
             const total = TCSHPRC - total2
-            console.log('3=');
+          //  console.log('3=');
             // console.log("tt",payamt ,data_dokkang,total1,total2 )
             if (total2 <= 0) {
                 // console.log("ร=",total2,total1)
-                console.log('4=');
+            //    console.log('4=');
                 const total = TCSHPRC - 0
                 let sum2 = +row[j + 1].payamt.toFixed(2)
                 data_total2.push({ dok: sum2 })
@@ -1003,7 +1166,7 @@ function generate1(su, row) {
                 //res.send(ggg)
 
             } else {
-                console.log('5=');
+               // console.log('5=');
                 // console.log("sum4=", +su[j].ton ) 
                 let sum = total2.toFixed(2)
                 data_total1.push({ ton: sum })
@@ -1030,7 +1193,7 @@ function generate1(su, row) {
             }
 
         } else {
-            console.log('6=');
+          //  console.log('6=');
             const payamt = row[j + 1].payamt
             //  console.log("su=",su[j].ton,"row=",row[j + 1].payamt,"pay=",payamt.toFixed(2))
             const TCSHPRC = su[j].kong
@@ -1039,7 +1202,7 @@ function generate1(su, row) {
             const total = TCSHPRC - total2
             //  console.log("j=",+payamt , +total1)
             if (total2 <= 0) {
-                console.log('7=');
+               // console.log('7=');
                 //       console.log("j=",total2,total1)
                 const total = TCSHPRC - 0
                 let sum2 = +row[j + 1].payamt.toFixed(2)
@@ -1090,7 +1253,7 @@ function generate1(su, row) {
 
             //    }
             else {
-                console.log('8=');
+               // console.log('8=');
                 let sum = total2.toFixed(2)
                 data_total1.push({ ton: sum })
 
@@ -1122,7 +1285,7 @@ function generate1(su, row) {
 
         //   su.push({ dat: Stte.toLocaleDateString(), pay: row[j + 1].payamt, dok: total1.toFixed(2), ton: total2.toFixed(2), kong: total.toFixed(2) })
         if (su.length == row.length) {
-            console.log(EndDate, Stte)
+          //  console.log(EndDate, Stte)
             ff = EndDate.getTime() - Stte.getTime();   //วันสุดท้าย - วันเริ่ม = ? millisec
             ff = Math.floor(ff / (1000 * 60 * 60 * 24));
 
@@ -1131,7 +1294,7 @@ function generate1(su, row) {
             const total1 = TCSHPRC * (0.15 / 365) * ff
             const total2 = +total1
 
-            console.log("sum=", su[su.length - 1].kong)
+         //   console.log("sum=", su[su.length - 1].kong)
             if (total2 <= 0) {
                 const total = TCSHPRC - 0
                 let sum2 = 0
@@ -1152,7 +1315,7 @@ function generate1(su, row) {
 
                 //  data_total1.push(~~total1.toFixed(2))
 
-                console.log('7=');
+          //      console.log('7=');
                 return su
             } else {
                 let sum = 0
@@ -1175,7 +1338,7 @@ function generate1(su, row) {
                 //   }, 0)
 
                 su.push({ a: re3.toFixed(2), b: re2.toFixed(2), c: 0, dat: EndDate.toLocaleDateString(), datekang: ff, pay: 0, dok: 0, ton: -total1.toFixed(2), kong: su[su.length - 1].kong })
-                console.log('10=');
+             //   console.log('10=');
                 return su
 
             }
@@ -1215,7 +1378,7 @@ exports.getre1 = (req, res, next) => {
     const Month = CREAT.getMonth() + 1;
     EndDate = new Date()
     const t = "" + Year + "" + '-' + "" + Month + "" + '-' + "" + day + ""
-
+  
     UserModel.getre1({ ma: ma, contno: contno, ddate: t })
         .then(([row]) => {
             let dok1 = []
@@ -1432,7 +1595,7 @@ exports.getre2 = (req, res, next) => {
     const totalpayment = req.payment_1
     const nopay = req.t_nopay
     const req_no = req.no
-    console.log(nopay, req_no)
+  //  console.log(nopay, req_no)
     const CREAT = new Date();
     const Year = CREAT.getFullYear();
     const day = CREAT.getDate();
@@ -1460,7 +1623,7 @@ exports.getre2 = (req, res, next) => {
                 UserModel.getMax_nopay({ ma: ma, contno: contno })
                     .then(([row]) => {
                         const totalnopay = +nopay - +row[0].NOPAY
-                        console.log(+row[0].NOPAY, +nopay)
+                      //  console.log(+row[0].NOPAY, +nopay)
                         tttt.push(0)
                         te.push({ INTAMT: 0, fee: 0, DELAY: 0, tttt, totalnopay: totalnopay, NOPAY: +row[0].NOPAY })
                         UserModel.getaa({ ma: ma, contno: contno })

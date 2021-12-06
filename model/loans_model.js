@@ -14,7 +14,7 @@ exports.queryAllLoansByPersonalId = async (personalId) => {
 
 exports.getAllBycustmast = async ({personalId,ma}) => {
     try {
-        return await pool.query("SELECT NAME1,NAME2  FROM "+ ma.toLowerCase() + "_custmast WHERE CUSCOD =  (select CUSCOD from cal2009.login  where PRODUCTID = ?) ",
+        return await pool.query("SELECT * FROM "+ ma.toLowerCase() + "_custmast WHERE CUSCOD =  (select CUSCOD from cal2009.login  where PRODUCTID = ?) ",
             [personalId]);
     }
     catch (err) {
@@ -45,7 +45,7 @@ exports.queryInstallmentByContco = async ({ ma, contno }) => {
 
 exports.queryInstallmentHistoryByContco = async ({ ma, contno }) => {
     try {
-        return await pool.query("SELECT * FROM " + ma.toLowerCase() + "_chqtran JOIN " + ma.toLowerCase() + "_arpay ON " + ma.toLowerCase() + "_chqtran.CONTNO = " + ma.toLowerCase() + "_arpay.CONTNO AND " + ma.toLowerCase() + "_chqtran.L_PAY = " + ma.toLowerCase() + "_arpay.NOPAY join " + ma.toLowerCase() + "_armast on " + ma.toLowerCase() + "_armast.CONTNO = " + ma.toLowerCase() + "_chqtran.CONTNO join " + ma.toLowerCase() + "_invtran on " + ma.toLowerCase() + "_invtran.CONTNO = " + ma.toLowerCase() + "_chqtran.CONTNO WHERE " + ma.toLowerCase() + "_chqtran.CONTNO = ? ORDER BY L_PAY DESC", [contno]);
+        return await pool.query("SELECT * FROM " + ma.toLowerCase() + "_chqtran JOIN " + ma.toLowerCase() + "_arpay ON " + ma.toLowerCase() + "_chqtran.CONTNO = " + ma.toLowerCase() + "_arpay.CONTNO AND " + ma.toLowerCase() + "_chqtran.L_PAY = " + ma.toLowerCase() + "_arpay.NOPAY join " + ma.toLowerCase() + "_armast on " + ma.toLowerCase() + "_armast.CONTNO = " + ma.toLowerCase() + "_chqtran.CONTNO join " + ma.toLowerCase() + "_invtran on " + ma.toLowerCase() + "_invtran.CONTNO = " + ma.toLowerCase() + "_chqtran.CONTNO WHERE " + ma.toLowerCase() + "_chqtran.CONTNO = ? ORDER BY INPDATE DESC", [contno]);
     }
     catch (err) {
         console.log(err.message);

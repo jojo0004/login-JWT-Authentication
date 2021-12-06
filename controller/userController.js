@@ -12,7 +12,7 @@ let refreshTokens = []
 
 exports.loginController = (req, res, next) => {
     const { CUSCOD = '', PASSWORD } = req.body;
-    console.log(req.body)
+   // console.log(req.body)
     UserModel.findUserByEmail({ CUSCOD: CUSCOD })
         .then(([row]) => {
             if (row.length !== 0) {
@@ -174,7 +174,7 @@ exports.getre2 = (req, res, next) => {
                             }
                             else if (str[0] === 'I') {
                                 contno_.push('05' + str1[0])
-                                console.log(str1[0])
+                             //   console.log(str1[0])
                             }
                             else if (str[0] === 'K') {
                                 contno_.push('09' + str1[0])
@@ -221,7 +221,7 @@ exports.getre2 = (req, res, next) => {
                                 }
                                 else if (str[0] === 'I') {
                                     contno_.push('05' + str1[0])
-                                    console.log(str1[0])
+                                 //   console.log(str1[0])
                                 }
                                 else if (str[0] === 'K') {
                                     contno_.push('09' + str1[0])
@@ -280,7 +280,7 @@ exports.getre2 = (req, res, next) => {
                                 }
                                 else if (str[0] === 'I') {
                                     contno_.push('05' + str1[0])
-                                    console.log(str1[0])
+                                //    console.log(str1[0])
                                 }
                                 else if (str[0] === 'K') {
                                     contno_.push('09' + str1[0])
@@ -375,7 +375,7 @@ exports.getre2 = (req, res, next) => {
         
         UserModel.getdamt({ contno: contno, ddate: t, ma: ma })
             .then(([row]) => {
-                console.log(row) 
+            //    console.log(row) 
                 dataDAMT = []
                 checkDelay = []
                 dataDELAY = []
@@ -415,7 +415,7 @@ exports.getre2 = (req, res, next) => {
                             }
                             else if (str[0] === 'I') {
                                 contno_.push('05' + str1[0])
-                                console.log(str1[0])
+                              //  console.log(str1[0])
                             }
                             else if (str[0] === 'K') {
                                 contno_.push('09' + str1[0])
@@ -462,7 +462,7 @@ exports.getre2 = (req, res, next) => {
                                 }
                                 else if (str[0] === 'I') {
                                     contno_.push('05' + str1[0])
-                                    console.log(str1[0])
+                                  //  console.log(str1[0])
                                 }
                                 else if (str[0] === 'K') {
                                     contno_.push('09' + str1[0])
