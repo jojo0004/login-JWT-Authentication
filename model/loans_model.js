@@ -56,7 +56,7 @@ exports.queryInstallmentHistoryByContco = async ({ ma, contno }) => {
 
 exports.querychqtran = async ({ ma, contno }) => {
     try {
-        return await pool.query("SELECT sdate,NCARCST,TCSHPRC,paydt,NETPAY as payamt,T_NOPAY,TOT_UPAY FROM " + ma.toLowerCase() +"_chqtran JOIN "+ ma.toLowerCase() + "_armast ON " + ma.toLowerCase() + "_chqtran.CONTNO =" + ma.toLowerCase() +"_armast.CONTNO where " + ma.toLowerCase() +"_chqtran.CONTNO = ? and FLAG != 'C' ORDER BY "  + ma.toLowerCase() +"_chqtran.PAYDT" , [contno]);
+        return await pool.query("SELECT sdate,NCARCST,TCSHPRC,INPDATE as paydt,NETPAY as payamt,T_NOPAY,TOT_UPAY FROM " + ma.toLowerCase() +"_chqtran JOIN "+ ma.toLowerCase() + "_armast ON " + ma.toLowerCase() + "_chqtran.CONTNO =" + ma.toLowerCase() +"_armast.CONTNO where " + ma.toLowerCase() +"_chqtran.CONTNO = ? and FLAG != 'C' ORDER BY "  + ma.toLowerCase() +"_chqtran.PAYDT" , [contno]);
     }
     catch (err) {
         console.log(err.message);

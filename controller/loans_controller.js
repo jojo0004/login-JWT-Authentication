@@ -181,7 +181,7 @@ exports.getchtan = (req, res, next) => {
                     //  }, 0)
                     //  data_dokkang = sum3
                     // console.log("sum=",sum3)
-                    su.push({ a: re3, b: re2.toFixed(2), c: 0, dat: Stte.toLocaleDateString(), datekang: ff, pay: row[0].payamt, dok: total1.toFixed(2), ton: total2 | 0, kong: total.toFixed(2) })
+                    su.push({ a: re3, b: re2.toFixed(2), c: 0, dat: Stte.toLocaleDateString("th-TH", { timeZone: "UTC" }), datekang: ff, pay: row[0].payamt, dok: total1.toFixed(2), ton: total2 | 0, kong: total.toFixed(2) })
                     //  console.log("ff",payamt1);
 
                     //  data_total1.push(~~total1.toFixed(2))
@@ -216,7 +216,7 @@ exports.getchtan = (req, res, next) => {
                     //     return sum -= +number.dok_kang
                     // }, 0)
                     const total = NCARCST - total2
-                    su.push({ a: re3.toFixed(2), b: re2.toFixed(2), c: 0, dat: Stte.toLocaleDateString(), datekang: ff, pay: row[0].payamt, dok: total1.toFixed(2), ton: total2.toFixed(2), kong: total.toFixed(2) })
+                    su.push({ a: re3.toFixed(2), b: re2.toFixed(2), c: 0, dat: Stte.toLocaleDateString("th-TH", { timeZone: "UTC" }), datekang: ff, pay: row[0].payamt, dok: total1.toFixed(2), ton: total2.toFixed(2), kong: total.toFixed(2) })
 
                     if (row.length === 1) {
                    //     console.log('22=');
@@ -274,7 +274,7 @@ function generate(su, row) {
                 // }, 0)
                 // data_dokkang = sum3
                 //  console.log("sum-",sum3)
-                su.push({ a: re3, b: re2.toFixed(2), c: 0, dat: Stte.toLocaleDateString(), datekang: ff, pay: row[j + 1].payamt, dok: row[j + 1].payamt, ton: total2 | 0, kong: total.toFixed(2) })
+                su.push({ a: re3, b: re2.toFixed(2), c: 0, dat: Stte.toLocaleDateString("th-TH", { timeZone: "UTC" }), datekang: ff, pay: row[j + 1].payamt, dok: row[j + 1].payamt, ton: total2 | 0, kong: total.toFixed(2) })
                 //   const ggg = generate(su, row)
 
                 //      data_total1.push(~~total1.toFixed(2))
@@ -301,7 +301,7 @@ function generate(su, row) {
                 //      return sum -= +number.dok_kang
                 //  }, 0)
                 //  data_dokkang.push({dok_kang:sum3 })
-                su.push({ a: re3.toFixed(2), b: re2.toFixed(2), c: 0, dat: Stte.toLocaleDateString(), datekang: ff, pay: row[j + 1].payamt, dok: +total1.toFixed(2) - +su[j].ton, ton: total2.toFixed(2), kong: total.toFixed(2) })
+                su.push({ a: re3.toFixed(2), b: re2.toFixed(2), c: 0, dat: Stte.toLocaleDateString("th-TH", { timeZone: "UTC" }), datekang: ff, pay: row[j + 1].payamt, dok: +total1.toFixed(2) - +su[j].ton, ton: total2.toFixed(2), kong: total.toFixed(2) })
 
                 //   const ggg = generate(su, row)
 
@@ -341,7 +341,7 @@ function generate(su, row) {
                 //  data_dokkang = sum3
                 //   console.log("s",total2)
                 //  data_dokkang=sum3
-                su.push({ a: re3.toFixed(2), b: re2.toFixed(2), c: 0, dat: Stte.toLocaleDateString(), datekang: ff, pay: row[j + 1].payamt, dok: row[j + 1].payamt, ton: total2 | 0, kong: total.toFixed(2) })
+                su.push({ a: re3.toFixed(2), b: re2.toFixed(2), c: 0, dat: Stte.toLocaleDateString("th-TH", { timeZone: "UTC" }), datekang: ff, pay: row[j + 1].payamt, dok: row[j + 1].payamt, ton: total2 | 0, kong: total.toFixed(2) })
                 //   const ggg = generate(su, row)
 
                 // data_total1.push(~~total1.toFixed(2))
@@ -387,7 +387,7 @@ function generate(su, row) {
                 // const re1 = datatotal2.reduce((sum, number) => {
                 //     return sum -= +number.dok_kang
                 // }, 0)
-                su.push({ a: re3.toFixed(2), b: re2.toFixed(2), c: 0, dat: Stte.toLocaleDateString(), datekang: ff, pay: row[j + 1].payamt, dok: total1.toFixed(2), ton: total2.toFixed(2), kong: total.toFixed(2) })
+                su.push({ a: re3.toFixed(2), b: re2.toFixed(2), c: 0, dat: Stte.toLocaleDateString("th-TH", { timeZone: "UTC" }), datekang: ff, pay: row[j + 1].payamt, dok: total1.toFixed(2), ton: total2.toFixed(2), kong: total.toFixed(2) })
                 //  console.log('a=',total2);
                 //   const ggg = generate(su, row)
 
@@ -471,7 +471,7 @@ exports.getcusmast = (req, res, next) => {
         .then(([row]) => {
             DDATE = new Date(row[0].DDATE);
             SDATE = new Date(row[0].SDATE);
-            res.send({ TOT_UPAY: row[0].TOT_UPAY, T_NOPAY: row[0].T_NOPAY, DDATE: DDATE.toLocaleDateString(), NAME1: row[0].NAME1, NAME2: row[0].NAME2, SNAM: row[0].SNAM, CONTNO: row[0].CONTNO, PRODUCTID: row[0].PRODUCTID, SDATE: SDATE.toLocaleDateString(), TCSHPRC: row[0].NCARCST, TYPE: row[0].TYPE, BAAB: row[0].BAAB, STRNO: row[0].STRNO, MODEL: row[0].MODEL, COLOR: row[0].COLOR, ENGNO: row[0].ENGNO, REGNO: row[0].REGNO })
+            res.send({ TOT_UPAY: row[0].TOT_UPAY, T_NOPAY: row[0].T_NOPAY, DDATE: DDATE.toLocaleDateString("th-TH", { timeZone: "UTC" }), NAME1: row[0].NAME1, NAME2: row[0].NAME2, SNAM: row[0].SNAM, CONTNO: row[0].CONTNO, PRODUCTID: row[0].PRODUCTID, SDATE: SDATE.toLocaleDateString("th-TH", { timeZone: "UTC" }), TCSHPRC: row[0].NCARCST, TYPE: row[0].TYPE, BAAB: row[0].BAAB, STRNO: row[0].STRNO, MODEL: row[0].MODEL, COLOR: row[0].COLOR, ENGNO: row[0].ENGNO, REGNO: row[0].REGNO })
 
         }).catch((err) => {
             res.status(500).json({ message: err })
